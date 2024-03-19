@@ -1,0 +1,87 @@
+﻿@page
+@model ResaTicket.Pages.SeanceS.DetailsModel
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    /* CSS pour le style souhaité */
+    .container-form {
+        font-family: Verdana;
+        font-weight: bold;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+    }
+
+    .form-container {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .label {
+        flex-basis: 25%;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .input {
+        flex-basis: 70%;
+    }
+
+    .button-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .button {
+        margin-right: 20px;
+    }
+</style>
+
+<div class="container-form">
+    <h1 style="text-align:center;">Details</h1>
+
+    <div class="form-container">
+        <h4>Seance</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Seance.Horaire)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Seance.Horaire)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Seance.TypeDiffusion)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Seance.TypeDiffusion.ID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Seance.Film)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Seance.Film.ID)
+            </dd>
+        </dl>
+
+        <div class="button-container">
+            <a asp-page="./Edit" asp-route-id="@Model.Seance.ID" class="button btn btn-secondary" style="background-color: #D8B602;">Edit</a>
+            <a asp-page="./Index" class="button btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>

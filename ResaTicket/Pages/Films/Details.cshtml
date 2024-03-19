@@ -1,0 +1,112 @@
+﻿@page
+@model ResaTicket.Pages.Films.DetailsModel
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    /* CSS pour le style souhaité */
+    .container-form {
+        font-family: Verdana;
+        font-weight: bold;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+    }
+
+    .form-container {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .label {
+        flex-basis: 25%;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .input {
+        flex-basis: 70%;
+    }
+
+    .button-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .button {
+        margin-right: 20px;
+    }
+</style>
+
+
+<div class="container-form">
+    <h1 style="text-align:center;">Details du Film</h1>
+    <div class="form-container">
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Film.Nom)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Film.Nom)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Film.Duree)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Film.Duree)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Film.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Film.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Film.Realisateur)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Film.Realisateur)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Film.Acteur)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Film.Acteur)
+        </dd>
+    </dl>
+
+<div>
+        <a asp-page="./Edit" asp-route-id="@Model.Film.ID" class="button btn btn-secondary" style="background-color: #D8B602;">Edit</a>
+</div>
+</div>
+
+
+<!--    <div>
+
+   <table class="table">
+           
+            <tbody>
+                @foreach (var item in Model.Film.LesFilmsLangue)
+                {
+                    <tr>
+                        <td> @Html.DisplayFor(modelItem => item.LLangue.Nom) </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    -->

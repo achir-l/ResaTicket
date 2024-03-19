@@ -1,0 +1,40 @@
+﻿@page
+@model ResaTicket.Pages.Tarifs.EditModel
+@{
+}
+
+<h4>Choisir un cinéma pour afficher les séances</h4>
+
+<!-- Premier formulaire pour charger les séances du cinéma -->
+<form method="post" asp-page-handler="ChargerUE">
+    <div class="form-group">
+        <select asp-for="Tarif.CINEMAID" class="form-control" asp-items="@ViewBag.CINEMAID">
+            <option value="">Choisir un Cinéma</option>
+        </select>
+        <span asp-validation-for="Tarif.CINEMAID" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Charger les séances du cinéma" class="btn btn-primary" />
+    </div>
+</form>
+
+@if (Model.Cinema != null && Model.Seances.Any())
+{
+    <h4>Séances du cinéma : @Model.Cinema.Nom</h4>
+    <form method="post" asp-page-handler="GarderTarifs">
+        <input type="hidden" name="cinemaID" value="@Model.Cinema.ID" /> <!-- Champ caché pour stocker l'ID du cinéma -->
+        
+            <ul>
+                @foreach (var seance in Model.Seances)
+                {
+                    <li>
+                        @seance.Horaire
+                        <input type="number" name="tarifs[@seance.ID].prix" placeholder="Prix du tarif" />
+                        <input type="hidden" name="tarifs[@seance.ID].SEANCEID" value="@seance.ID" />
+                    </li>
+                }
+            </ul>
+            <input type="submit" value="Enregistrer les tarifs" class="btn btn-primary" />
+    </form>
+}
+

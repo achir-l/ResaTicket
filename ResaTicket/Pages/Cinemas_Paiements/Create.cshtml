@@ -1,0 +1,40 @@
+﻿@page
+@model ResaTicket.Pages.Cinemas_Paiements.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h4>Ajouter un moyen de paiement</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+               <!-- <label asp-for="Cinema_Paiement.CinemaID" class="control-label"></label> -->
+                <!--<select asp-for="Cinema_Paiement.CinemaID" class="form-control" asp-items="@ViewBag.CinemaID"></select> -->
+                <input type="hidden" asp-for="Cinema_Paiement.CinemaID" value="@Model.Cinema.ID" />
+            <div class="form-group">
+         
+                <label asp-for="Cinema_Paiement.TypePaiementID" class="control-label"></label>
+                <select asp-for="Cinema_Paiement.TypePaiementID" class="form-control" asp-items="@ViewBag.TypePaiementID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

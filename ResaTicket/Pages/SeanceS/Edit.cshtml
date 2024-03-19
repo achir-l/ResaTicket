@@ -1,0 +1,94 @@
+﻿@page
+@model ResaTicket.Pages.SeanceS.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    /* CSS pour le style souhaité */
+    .container-form {
+        font-family: Verdana;
+        font-weight: bold;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+    }
+
+    .form-container {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .label {
+        flex-basis: 25%;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .input {
+        flex-basis: 70%;
+    }
+
+    .button-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .button {
+        margin-right: 20px;
+    }
+</style>
+
+<div class="container-form">
+    <h1 style="text-align:center;">Modifier la séance</h1>
+    <div class="form-container">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Seance.ID" />
+            <div class="form-group">
+                <span class="label">Horaire</span>
+                <input asp-for="Seance.Horaire" class="input" />
+            </div>
+            <div class="form-group">
+                <span class="label">Numéro salle</span>
+                <input asp-for="Seance.NumeroSalle" class="input" />
+            </div>
+            <div class="form-group">
+                <span class="label">Date du jour</span>
+                <input asp-for="Seance.DateJour" class="input" />
+            </div>
+            <div class="form-group">
+                <span class="label">Type de diffusion</span>
+                <select asp-for="Seance.TypeDiffusionID" class="input" asp-items="ViewBag.TypeDiffusionID"></select>
+            </div>
+            <div class="form-group">
+                <span class="label">Film</span>
+                <select asp-for="Seance.FilmID" class="input" asp-items="ViewBag.FilmID"></select>
+            </div>
+
+            <div class="button-container">
+                <input type="submit" value="Enregistrer" class="button btn-primary" style="background-color: #D8B602;" />
+                <a asp-page="Index" class="button btn btn-secondary">Annuler</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

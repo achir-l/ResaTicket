@@ -1,0 +1,146 @@
+﻿@page
+@model ResaTicket.Pages.SeanceS.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    body {
+        font-family: Verdana;
+        font-weight: bold;
+    }
+
+    .container-form {
+        font-family: Verdana;
+        font-weight: bold;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+    }
+
+    .form-container {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .seance-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .seance-table th,
+        .seance-table td {
+            border: 2px solid #D8B602;
+            padding: 5px; /* Réduire le rembourrage */
+            text-align: left;
+        }
+
+        .seance-table th {
+            background-color: #D8B602;
+            color: white;
+        }
+
+        .seance-table td:last-child a {
+            margin-right: 10px;
+        }
+
+    .image-column img {
+        max-height: 50px; 
+        max-width: 50px; 
+        vertical-align: middle; 
+    }
+
+</style>
+
+<h1 class="image-column"> Mes séances <img src="~/images/billet.png" alt="Image de la séance" /></h1>
+
+<table class="seance-table">
+    <thead>
+        <tr>
+            <th>
+                Horaire
+            </th>
+            <th>
+                Date du jour
+            </th>
+            <th>
+                Numéro de la salle
+            </th>
+            <th>
+                Type diffusion
+            </th>
+            <th>
+                Nom Film
+            </th>
+            <th>
+                Le tarif
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <form method="post">
+    <tbody>
+            @foreach (var item in Model.Seance)
+            {
+            <tr>
+                <td>
+                        @Html.DisplayFor(modelItem => item.Horaire)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.DateJour)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.NumeroSalle)
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.TypeDiffusion.Nom)
+                </td>
+                <td>
+                    
+                        @Html.DisplayFor(modelItem => item.Film.Nom)
+                </td>
+                <td>
+                        @foreach (var tarif in item.LesTarifs)
+                        {
+                            @tarif.prix <p>€</p>
+                        }
+                </td>
+                <td>
+                    <div class="actions">
+                        <a asp-page="./Edit" asp-route-id="@item.ID" asp-route-cinemaId="@Request.Query["id"]" class="btn btn-primary" style="background-color: #D8B602; border-color:#D8B602;">Edit</a>
+
+                        <a asp-page="./Delete" asp-route-id="@item.ID" class="btn btn-primary" style="background-color: #D8B602; border-color:#D8B602;">Delete</a>
+                    </div>
+                </td>
+            </tr>
+            }
+        <div class="cinema-item" style="text-align:center;">
+                @if (!string.IsNullOrEmpty(Request.Query["id"]))
+                {
+                    var cinemaId = Request.Query["id"];
+                <a asp-page="./Create" asp-route-id="@cinemaId">
+                    <img src="~/images/plus.png" style="height:50px;width:50px;" alt="Ajouter une séance" />
+                </a>
+                <p style="margin-top:10px;">Ajouter une séance</p>
+                }
+        </div>
+    </form>
+</table>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

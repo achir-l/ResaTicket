@@ -1,0 +1,88 @@
+﻿@page
+@model ResaTicket.Pages.Cinemas_Paiements.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .table th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .button-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .button {
+        margin-right: 20px;
+    }
+</style>
+
+<h1>Tous les types de paiement du cinéma</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Cinema
+            </th>
+            <th>
+                Type de Paiement
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.CinemaPaiement != null)
+        {
+            @foreach (var item in Model.CinemaPaiement)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TCinema.Nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TTypePaiement.Nom)
+                    </td>
+                    <td style="display:flex;">
+                        <a asp-page="./Edit" asp-route-id="@item.ID" class="button btn btn-primary" style="background-color: #D8B602;">Edit</a>
+
+                        <form method="post" onsubmit="return confirm('Are you sure you want to delete this?');">
+                            <input type="hidden" name="id" value="@item.ID" />
+                            <button type="submit" class="button btn btn-primary" style="background-color: #D8B602; margin-left: 5px;">Delete</button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+
+<div class="button-container">
+    <a asp-page="Create" asp-route-id="@Model.CinemaID" style="background-color: #D8B602;"class="button btn btn-primary">Create New</a>
+</div>
+

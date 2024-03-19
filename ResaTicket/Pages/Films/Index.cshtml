@@ -1,0 +1,137 @@
+﻿@page
+@model ResaTicket.Pages.Films.IndexModel
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    body {
+        font-family: Verdana;
+        font-weight: bold;
+    }
+
+    .cinema-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .cinema-item {
+        flex: 0 0 calc(50% - 20px);
+        border: 2px solid #D8B602;
+        border-radius: 30px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+
+
+    .cinema-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .cinema-image {
+        /* Ajoutez vos styles pour l'image ici */
+    }
+
+    .cinema-details {
+        flex-grow: 1;
+    }
+
+    .actions {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<h1>Mes films</h1>
+
+<div class="cinema-list">
+    @foreach (var item in Model.Film)
+    {
+        <div class="cinema-item">
+            <div class="cinema-info">
+                <div class="cinema-image">
+                    <img src="~/images/cinema.png" style="height:120px;width:60%;">
+                </div>
+                <div class="cinema-details">
+                    <h2>@Html.DisplayFor(model => item.Nom)</h2>
+                    <p>@Html.DisplayFor(model => item.Duree) | @Html.DisplayFor(model => item.Acteur)</p>
+                    <p>De  @Html.DisplayFor(model => item.Realisateur)</p>
+                </div>
+            </div>
+            <div class="actions">
+                <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.ID" style="background-color: #D8B602; margin-right:20px;border-color:#D8B602;">Edit</a>
+                <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.ID" style="background-color: #D8B602; margin-right:20px;border-color:#D8B602;">Details</a>
+                <a class="btn btn-primary" asp-page="./Delete" asp-route-id="@item.ID" style="background-color: #D8B602; margin-right:20px;border-color:#D8B602;">Delete</a>
+                <a class="btn btn-primary" asp-page="../FilmsLangues/Index" asp-route-id="@item.ID" style="background-color: #D8B602; margin-right:20px;border-color:#D8B602;">Les langues</a>
+            </div>
+        </div>
+    }
+    <div class="cinema-item" style="text-align:center;">
+        <a asp-page="./Create"> <img src="~/images/plus.png" style="height:120px;width:40%;"></a><br />
+        <p style="margin-top:20px;">Ajouter un Film</p>
+    </div>
+</div>
+
+<!--
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Film[0].Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Film[0].Duree)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Film[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Film[0].Realisateur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Film[0].Acteur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Film[0].Image)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Film) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duree)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Realisateur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Acteur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+-->

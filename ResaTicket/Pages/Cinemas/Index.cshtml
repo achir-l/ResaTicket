@@ -1,0 +1,97 @@
+﻿@page
+@model ResaTicket.Pages.Cinemas.IndexModel
+
+
+@{
+    ViewData["Title"] = "Mes cinémas";
+}
+
+<style>
+    body {
+        background-image: url('Resaticket\wwwroot\images\cinema_fond.jpg');
+        background-size: cover;
+        background-position: center;
+        font-family: Verdana;
+        font-weight: bold;
+    }
+
+    /* Vos autres styles CSS ici */
+    .cinema-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .cinema-item {
+        flex: 0 0 calc(50% - 20px);
+        border: 2px solid #D8B602;
+        border-radius: 30px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .cinema-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .cinema-image {
+        /* Ajoutez vos styles pour l'image ici */
+    }
+
+    .cinema-details {
+        flex-grow: 1;
+    }
+
+    .actions {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<body>
+<h1>Mes cinémas</h1>
+
+<div class="cinema-list">
+    @foreach (var item in Model.Cinema)
+    {
+        <div class="cinema-item">
+            <div class="cinema-info">
+                <div class="cinema-image">
+                        <img src="~/images/cinema.png" style="height:120px;width:60%;">
+                </div>
+                <div class="cinema-details">
+                    <h2>@Html.DisplayFor(modelItem => item.Nom)</h2>
+                    <p>@Html.DisplayFor(modelItem => item.Num_rue) @Html.DisplayFor(modelItem => item.Rue)</p>
+                    <div style="display:flex !important">
+                            <img src="~/images/balise-seo.png" style="height:25px;width:25px;"><p>@Html.DisplayFor(modelItem => item.Ville)</p> 
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.ID" style="background-color: #D8B602; margin-right:10px;border-color:#D8B602;">Edit</a>
+                <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.ID" style="background-color: #D8B602; margin-right:10px;border-color:#D8B602;">Details</a>
+                <a class="btn btn-primary" asp-page="./Delete" asp-route-id="@item.ID" style="background-color: #D8B602; margin-right:10px;border-color:#D8B602;">Delete</a>
+               
+               
+                   
+            </div>
+                <div class="actions">
+                <a class="btn btn-primary" asp-page="../Cinemas_Paiements/Index" asp-route-id="@item.ID" style="background-color: #D8B602; margin-right:15px;border-color:#D8B602; margin-top: 20px">Type de Paiements</a>
+            <a class="btn btn-primary" asp-page="../Tarifs/Edit" style="background-color: #D8B602; margin-right:10px;border-color:#D8B602; margin-top: 20px">Les tarifs</a>
+                <a class="btn btn-primary" asp-page="../Seances/Index" asp-route-id="@item.ID" style="background-color: #D8B602; margin-right:20px;border-color:#D8B602;  margin-top: 20px">Séances</a>
+                </div>
+
+        </div>
+    }
+        <div class="cinema-item" style="text-align:center;">
+            <a asp-page="./Create"> <img src="~/images/plus.png" style="height:120px;width:40%;"></a><br/>
+            <p style="margin-top:20px;">Ajouter un Cinéma</p>
+        </div>
+</div>
+
+
+</body>

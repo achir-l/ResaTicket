@@ -1,0 +1,99 @@
+﻿@page
+@model ResaTicket.Pages.Films.CreateModel
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+<style>
+    /* CSS pour le style souhaité */
+    .container-form {
+        font-family: Verdana;
+        font-weight: bold;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+    }
+
+    .form-container {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .label {
+        flex-basis: 25%;
+        text-align: right;
+        padding-right: 10px;
+    }
+
+    .input {
+        flex-basis: 70%;
+    }
+
+    .button-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .button {
+        margin-right: 20px;
+    }
+</style>
+<div class="container-form">
+    <h1 style="text-align:center;">Ajouter Film</h1>
+
+    <div class="form-container">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="label">Nom</span>
+                <input asp-for="Film.Nom" class="input" />
+                <span asp-validation-for="Film.Nom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="label">Durée</span>
+                <input asp-for="Film.Duree" class="input" />
+                <span asp-validation-for="Film.Duree" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="label">Description</span>
+                <input asp-for="Film.Description" class="input" />
+                <span asp-validation-for="Film.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="label">Realisateur</span>
+                <input asp-for="Film.Realisateur" class="input" />
+                <span asp-validation-for="Film.Realisateur" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="label">Acteur</span>
+                <input asp-for="Film.Acteur" class="input" />
+                <span asp-validation-for="Film.Acteur" class="text-danger"></span>
+            </div>
+
+           <!-- <div class="form-group">
+                <span class="label">Langue de diffusion</span>
+                <select class="input" asp-for="Film.LangueID" asp-items="ViewBag.LangueID"></select>
+            </div>-->
+            <div class="button-container">
+                <input type="submit" value="Enregistrer" class="button btn btn-primary" style="background-color: #D8B602;" />
+                <a asp-page="Index" class="button btn btn-secondary">Annuler</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

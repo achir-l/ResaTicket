@@ -1,0 +1,86 @@
+﻿@page
+@model ResaTicket.Pages.FilmsLangues.IndexModel
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th {
+        background-color: #f2f2f2;
+        color: #333;
+        font-weight: bold;
+        padding: 8px;
+        text-align: left;
+     }
+
+    .table td {
+       border: 1px solid #ddd;
+       padding: 8px;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .button-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .button {
+        margin-right: 20px;
+    }
+</style>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Film
+            </th>
+            <th>
+                Langue
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@if (Model.Film_Langue != null)
+{
+@foreach (var item in Model.Film_Langue) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LFilm.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LLangue.Nom)
+            </td>
+                    <td>
+                        <div style="display: flex;">
+                            <a asp-page="./Edit" asp-route-id="@item.ID" class="button btn btn-primary" style="background-color: #D8B602;">Edit</a>
+
+                            <form method="post" onsubmit="return confirm('Are you sure you want to delete this?');">
+                                <input type="hidden" name="id" value="@item.ID" />
+                                <button type="submit" class="button btn btn-primary" style="background-color: #D8B602; margin-left: 5px;">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+
+        </tr>
+}
+}
+    </tbody>
+</table>
+<div class="button-container" style="text-align:center;">
+    <a asp-page="./Create" asp-route-id="@Model.FilmID" class="button btn btn-primary" style="background-color: #D8B602;" > Associer une nouvelle langue de diffusion</a>
+</div>
+
